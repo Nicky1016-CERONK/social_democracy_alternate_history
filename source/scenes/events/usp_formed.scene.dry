@@ -11,6 +11,20 @@ Q.nomads_usp = Q.nomads_cp + Q.nomads_ncsdp
 Q.unemployed_usp = Q.unemployed_cp + Q.unemployed_ncsdp
 Q.merc_usp = Q.merc_cp + Q.merc_ncsdp
 
+Q.workers_cp = 0;
+Q.corpo_cp = 0;
+Q.pink_cp = 0;
+Q.nomads_cp = 0;
+Q.unemployed_cp = 0;
+Q.merc_cp = 0;
+
+Q.workers_ncsdp = 0;
+Q.corpo_ncsdp = 0;
+Q.pink_ncsdp = 0;
+Q.nomads_ncsdp = 0;
+Q.unemployed_ncsdp = 0;
+Q.merc_ncsdp = 0;
+
 if (Q.electoral_threshold < 5) {
     Q.workers_usp += 4
     Q.pink_usp += 4
