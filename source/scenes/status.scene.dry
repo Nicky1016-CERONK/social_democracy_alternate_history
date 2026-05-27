@@ -69,7 +69,7 @@ Next election: [+ next_election_month : month +] [+ next_election_year +]
 
 {!<span class="tooltip-text" title="The Radicals are a group of revolutionary socialists who work to revolt Night City into a dictatorship of the people. The reason that they didn't simply join the NCWPP is often simply due to ideological differences.">Radical</span>!} strength: [+ radical_strength : strength +], dissent: [+ radical_dissent : dissent +]
 
-{!<span class="tooltip-text" title="The Industrialists are a faction of individuals that push for more industrial production in the Night City. Many members of this faction are industrial workers.">Industrialist</span>!} strength: [+ industrialist_strength : strength +], dissent: [+ industrialist_dissent : dissent +]
+{!<span class="tooltip-text" title="The Labor wing pushes for stronger controls on capitalism and corporations, speaking for the workers.">Labor</span>!} strength: [+ labor_strength : strength +], dissent: [+ labor_dissent : dissent +]
 
 {!<span class="tooltip-text" title="The Socialist faction is mostly committed to a policy of social democracy, welfare, and fair taxes.">Socialist</span>!} strength: [+ socialist_strength : strength +], dissent: [+ socialist_dissent : dissent +]
 
