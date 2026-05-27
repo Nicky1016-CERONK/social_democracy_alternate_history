@@ -5,7 +5,7 @@ on-arrival: spd_in_government = 0
 tags: event
 new-page: true
 
-[? if bauer_deported and president != "Bauer" and mayor != "Bauer": The first act that Mayor [+ mayor +] takes upon assuming office is bringing Rudolf Bauer back to Germany, and giving him citizenship and an official cabinet position. ?]
+[? if bauer_deported and president != "Bauer" and mayor != "Bauer": The first act that Mayor [+ mayor +] takes upon assuming office is bringing Rudolf Bauer back to Night City, and giving him citizenship and an official cabinet position. ?]
 
 Bauer has promised a campaign of revenge against his opposition, and the Nazis have already spilled much blood on the streets. In his published manifesto, he promises a campaign of unspeakable horror against our Muslims, and endless wars of violent expansion that will ruin all of North America.
 
@@ -26,7 +26,7 @@ Do we realize that this means civil war, against the full force of the state?
 
 Speeches are made. Votes are held. Bullets fly in the streets. Some politicians are killed or jailed. Others flee the city. What can votes even do at this juncture?
 
-The Reichstag is burned, ostensibly by a foreign communist. In the wake, the Nazis pass decrees giving them unlimited power. They will win a majority at the next elections.
+The City Center is burned, ostensibly by a terror cell formed from the remains of our Radicals. In the wake, the Nazis pass decrees giving them unlimited power. They will win a majority at the next elections.
 
 Night City is lost.
 
