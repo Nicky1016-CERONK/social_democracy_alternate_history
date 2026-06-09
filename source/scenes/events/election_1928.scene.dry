@@ -103,8 +103,8 @@ Q.lithuania_council = Q.ip_r + Q.fp_r + Q.lp_r - 3;
 Q.grand_council = Q.ip_r + Q.dp_r + Q.lp_r;
 Q.corporate_council = Q.dp_r + Q.lp_r + Q.fp_r;
 Q.earth_council = Q.ip_r + Q.dp_r;
-Q.corporate_council = Q.fp_r + Q.lp_r;
-Q.left_council = Q.ip_r + Q.cp_r;
+Q.left_council = Q.ip_r + Q.cp_r + Q.ncsdp_r;
+Q.left_council_usp = ip_r + Q.usp_r;
 
 if (Q.cp_relation >= 30) {
     Q.weimar_council += Q.sapd_r;
@@ -136,19 +136,19 @@ if (Q.nsnawp_r >= 15) {
     Q.understanding_enemy_timer = 2;
 }
 
-var election_result = {'date': new Date(Q.year, Q.month - 1)};
+var election_result = {'date': new Date(Q.year, Q.month - d1)};
 for (var party of Q.parties) {
     election_result[party] = Q[party + '_r'];
 }
 Q.election_records.push(election_result);
 !}
-on-departure: nalpi_urgency = 1 if (nalpi_urgency == 0 and nsnawp_r >= 15)
+on-departure: nazi_urgency = 1 if (nazi_urgency == 0 and nsnawp_r >= 15)
 on-display: {!
 data = [
     {
         "id": "cp",
-        "legend": "Communists",
-        "name": "Communists",
+        "legend": "NCWPP",
+        "name": "NCWPP",
         "seats": Math.round(Q.cp_r*5),
     }
 ];
@@ -157,32 +157,32 @@ if (Q.sapd_formed && Q.sapd_r) {
 data = data.concat([
     {
         "id": "ip",
-        "legend": "Independent",
-        "name": "Independent",
+        "legend": "IPNC",
+        "name": "IPNC",
         "seats": Math.round(Q.ip_r*5),
     },
     {
         "id": "dp",
-        "legend": "Devolutionist",
-        "name": "Devolutionist",
+        "legend": "DP",
+        "name": "DP",
         "seats": Math.round(Q.dp_r*5),
     },
     {
         "id": "lp",
-        "legend": "Libertarian",
-        "name": "Libertarian",
+        "legend": "LPNC",
+        "name": "LPNC",
         "seats": Math.round((Q.lp_r - 3)*5),
     },
     {
         "id": "fp",
-        "legend": "Federalist",
-        "name": "Federalist",
+        "legend": "FP",
+        "name": "FP",
         "seats": Math.round(Q.fp_r*5),
     },
     {
         "id": "nsnawp",
-        "legend": "National Socialists",
-        "name": "National Socialists",
+        "legend": "NSNCWP",
+        "name": "NSNCWP",
         "seats": Math.round(Q.nsnawp_r*5),
     },
 ]);
@@ -212,17 +212,19 @@ go-to: council_menu
 
 {!<table>!} 
 {!<tr><td>Party</td><td>Vote share</td><td>% Change</td></tr>!}
-{!<tr><td><div class="box" style='background-color:#13BE1F; outline: 2px; outline-style: solid;'> </div> !} **Independent:** {!</td><td>!} **[+ ip_r +]%** {!</td><td>!} **[+ str_change_ip +]** {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#13BE1F; outline: 2px; outline-style: solid;'> </div> !} **IPNC:** {!</td><td>!} **[+ ip_r +]%** {!</td><td>!} **[+ str_change_ip +]** {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#540F00'> </div> !}Communists: {!</td><td>!} [+ cp_r +]% {!</td><td>!} [+ str_change_cp +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#540F00'> </div> !} NCSDP: {!</td><td>!} [+ cp_r +]% {!</td><td>!} [+ str_change_cp +] {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#083A90'> </div> !} Devolutionists: {!</td><td>!} [+ dp_r +]% {!</td><td>!} [+ str_change_dp +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#540F00'> </div> !} NCWPP: {!</td><td>!} [+ ncsdp_r +]% {!</td><td>!} [+ str_change_ncsdp +] {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#FED000'> </div> !} Libertarians: {!</td><td>!} [+ lp_r +]% {!</td><td>!} [+ str_change_lp +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#083A90'> </div> !} DP: {!</td><td>!} [+ dp_r +]% {!</td><td>!} [+ str_change_dp +] {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#FF2B00'> </div> !} Federalists: {!</td><td>!} [+ fp_r +]% {!</td><td>!} [+ str_change_fp +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#FED000'> </div> !} LPNC: {!</td><td>!} [+ lp_r +]% {!</td><td>!} [+ str_change_lp +] {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#0166ff'> </div> !} National Socialists: {!</td><td>!} [+ nsnawp_r +]% {!</td><td>!} [+ str_change_nsnawp +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#FF2B00'> </div> !} FP: {!</td><td>!} [+ fp_r +]% {!</td><td>!} [+ str_change_fp +] {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#0166ff'> </div> !} NSNCWP: {!</td><td>!} [+ nsnawp_r +]% {!</td><td>!} [+ str_change_nsnawp +] {!</td></tr>!}
 {!</table>!}
 
 **Potential councils:**
@@ -246,6 +248,7 @@ There are some potential council arrangements.
 - @earth_council
 - @grand_council
 - @corporate_council
+- @left_council_usp
 - @no_majority
 - @left_council
 - @nazi_council
@@ -256,10 +259,10 @@ There are some potential council arrangements.
 title: Nazi council
 subtitle: National Socialists + Federalists ([+ nazi_council +]%)
 view-if: nazi_council >= 50
-go-to: left_council
+go-to: nazi_council
 priority: 2
 
-There are enough votes for the National Socialists and the Federalists to form a council. [+ nsnawp_leader +] has made his participation in government contingent on being appointed chancellor. It is up to President [+ president +] to decide.
+There are enough votes for the National Socialists and the Federalists to form a council. [+ nsnawp_leader +] has made his participation in government contingent on being appointed chancellor. It is up to Mayor [+ mayor +] to decide.
 
 @earth_council
 title: We can form an Earth council
@@ -270,12 +273,12 @@ There are enough votes for us and the Devolutionists to form a council.
 
 @left_council
 title: Is a United Left council possible?
-subtitle: Independent + Communists + Devolutionists ([+ left_council +]%)
-unavailable-subtitle: Independent + Communists ([+ left_council +]%). [? if cp_relation < 50 : We do not have adequate relations with the Communists. ?][? if communist_council < 3 : The Communists are too committed to their radical ways to partake in government. ?]
+subtitle: IPNC + NCWPP + NCSDP ([+ left_council +]%)
+unavailable-subtitle: IPNC + NCWPP + NCSDP ([+ left_council +]%). [? if cp_relation < 50 : We do not have adequate relations with the Communists. ?][? if ((radical_strength + socialist_strength) < (industrialist_strength + labor_strength + liberal_strength)) : The socialists and radicals in our party are far outmatched. ?]
 view-if: left_council >= 50
-choose-if: (cp_relation >= 50 or (cp_party_leader == "Conciliators" and cp_relation >= 40)) and dp_relation >= 40
+choose-if: cp_relation >= 50 and ncsdp_relation >= 40 and ((radical_strength + socialist_strength) > (industrialist_strength + labor_strength + liberal_strength))
 
-There are enough votes for a Independent + Communist council government, if such a thing were actually possible.
+There are enough votes for a leftist unity council government, if such a thing were actually possible.
 
 The far-right might attempt a coup, if such a council were formed.
 
@@ -290,26 +293,11 @@ A united left council is impossible.
 
 @left_council_possible
 
-The Communists are still very reluctant to join a council, despite grassroots friendliness between our memberships. The Stalinist leadership is vehemently against such a thing. They demand the appointment of Ernst Thälmann as chancellor in exchange for a council. [? if president == "Hindenburg" : There is no chance whatsoever that President Hindenburg would approve of the appointment of a die-hard communist as chancellor. ?] Alternatively, if our relations with them are good enough, we could convince them to support the appointment of one of our centrist or left-leaning members as chancellor.
+The Communists are still very reluctant to participate in government, despite grassroots friendliness between our memberships. The Stalinist leadership is vehemently against such a thing. Alternatively, if our relations with them are good enough, we could convince them to join anyways.
 
-- @thalmann_chancellor: Appoint Thälmann as chancellor.
 - @left_council_resources
 - @left_council_relations
 - @council_menu: Try a different governing arrangement.
-
-@thalmann_chancellor
-choose-if: president == "Braun" and reformist_strength + neorevisionist_strength < left_strength
-unavailable-subtitle: [? if president != "Braun": President [+ president +] would never allow such a thing. ?] [? if reformist_strength >= left_strength : Most in the parliamentary party would not support Thälmann as chancellor. ?]
-on-arrival: chancellor = "Thälmann"; chancellor_party = "Communists"; cp_relation = 80; in_left_front = 1; ip_in_government = 1 
-
-With great reluctance, President [+ president +] appoints [+ chancellor +] as chancellor.
-
-Immediately, [+ chancellor +] goes to work building a "Soviet Germany": consolidating as much power as possible in the Communists, purging state institutions of anti-communists, and sending street fighters against the "enemies of the people".
-
-In response to [+ chancellor +] being appointed Chancellor, the right-wing forces launches almost immediately launch an attempted coup. Troops of the Stahlhelm and Nalpi SA enter Berlin and immediately begin clashing with our supporters! Reactionary officers within the Reichswehr have taken their troops out of the barracks and joined them with the Stahlhelm to stop the Communists from taking power. We are forced to be on the same side as the Communists, whether we want to or not.
-
-- @civil_war
-
 
 @left_council_resources
 title: Use our resources to smooth things over.
@@ -345,9 +333,9 @@ The Communists has taken an abstentionist position with regards to ministries. T
 Whatever their reasoning is, the Independent has control over the ministries of government.
 
 @left_council_civil_war
-on-arrival: reichswehr_loyalty += 0.1
+on-arrival: pmc_loyalty += 0.1
 
-In response to the Communists's entrance into the government, the right-wing immediately launches a coup attempt. Troops of the Stahlhelm and Nalpi SA enter Berlin and begin clashing with our supporters. Reactionary officers within the Reichswehr have taken their troops out of the barracks and joined them with the Stahlhelm to stop us from taking power.
+In response to the Communists's entrance into the government, the right-wing immediately launches a coup attempt. Troops of the Nazi Storm Division enter Berlin and begin clashing with our supporters. Reactionary mercenaries and officers join them in combatting the government.
 
 - @civil_war: A civil war, then.
 
@@ -358,14 +346,14 @@ title: Refuse to form a government, so that a corporatist council may be formed.
 subtitle: Libertarian + Federalist ([+ corporate_council +]%)
 view-if: corporate_council >= 50
 
-There are enough votes for a right-wing council of the Libertarian (+ BVP), Federalist, DNVP, and minor conservative parties. [? if largest_party == "Independent": However, this will be seen as abdicating responsibility for government, as we are the largest party. ?]
+There are enough votes for a right-wing council of the Libertarian and Federalist parties. [? if largest_party == "IPNC": However, this will be seen as abdicating responsibility for government, as we are the largest party. ?]
 
-- @corporate_council_sure: Yes, we will abdicate our responsibility for government formation, and let a right-wing council take power.
+- @corporate_council_sure: Yes, we will abdicate our responsibility for government formation, and let a corporatist council take power.
 - @grand_council: Actually, we wish to form a grand council after all.
 
 @corporate_council_sure
 subtitle: This will be extremely unpopular within our party.
-on-arrival: pro_republic -= 5; green_dissent += 15; socialist_dissent += 10; liberal_dissent += 25; industrialist_dissent += 25; lp_relation -= 5; dp_relation -= 5; fp_relation -= 5
+on-arrival: pro_republic -= 5; radical_dissent += 15; socialist_dissent += 10; liberal_dissent += 25; labor_dissent += 25; lp_relation -= 5; dp_relation -= 5; fp_relation -= 5
 
 @no_majority
 title: There is no clear governing majority.
@@ -477,7 +465,7 @@ Our experts have checked the constitution, and have discovered that there is no 
 Thus, we have Chancellor-President Otto Braun. He claims that he will resign as soon as the economic-political crisis is over. The right-wing parties, who were once clamoring to replace parliamentary rule with dictatorship or monarchy, are now clamoring for the restoration of democracy.
 
 - @far_right_coup
-- @emergency_no_confidence: The Nalpis immediately call a no-confidence vote against us...
+- @emergency_no_confidence: The nazis immediately call a no-confidence vote against us...
 
 @breitscheid_emergency_chancellor
 subtitle: The Communists are warming to him...
@@ -521,7 +509,7 @@ Their numbers are bolstered by the many government workers who are against the p
 
 
 @emergency_no_confidence
-title: The Nalpis immediately call a no-confidence vote against us...
+title: The nazis immediately call a no-confidence vote against us...
 view-if: nazi_council < 45
 on-arrival: lp_no_confidence = 1 if lp_relation < 45; cp_no_confidence = 1 if cp_relation < 45; other_no_confidence = 1 if (lp_relation + fp_relation)/2 < 45; fp_no_confidence = 1 if fp_relation < 45; sa_strength += 200; sh_strength += 200; no_confidence_votes = nsnawp_r + dnvp_r; no_confidence_votes += lp_r if lp_no_confidence; no_confidence_votes += fp_r if fp_no_confidence; no_confidence_votes += cp_r if cp_no_confidence; no_confidence_votes += other_r if other_no_confidence; no_confidence_succeeds = 1 if no_confidence_votes > 50
 
@@ -703,7 +691,7 @@ if (Q.nazi_council >= 50) {
 
 There is no path to a workable Reichstag majority or minority government. The next elections are set for [+ next_election_month : month +] [+ next_election_year +].
 
-The people's faith in democracy is shaken by this ordeal. Of course, the Nalpis are exploiting the instability to claim that democracy is unworkable, and that Germany needs a strong leader.
+The people's faith in democracy is shaken by this ordeal. Of course, the nazis are exploiting the instability to claim that democracy is unworkable, and that Germany needs a strong leader.
 
 
 @toleration_bruning
