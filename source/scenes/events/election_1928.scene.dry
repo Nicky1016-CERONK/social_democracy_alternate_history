@@ -21,7 +21,7 @@ The Reichstag elections are to be held now.
 @cancel_elections
 title: We cannot hold the elections now. Cancel the elections.
 subtitle: This is an anti-democratic move that may backfire.
-view-if: in_emergency_government == 1 and president == "Braun" and not presidential_powers
+view-if: in_emergency_government == 1 and mayor_party == "IPNC" and not presidential_powers
 
 Since we are currently ruling as part of an emergency government, we may use quasi-constitutional trickery to significantly delay these elections, and continue governing via Article 48. This is likely to be extremely unpopular both with our base and with the other parties. However, this may be necessary to prevent the extremists from gaining power.
 
@@ -29,7 +29,7 @@ Since we are currently ruling as part of an emergency government, we may use qua
 - @election_algorithm: No, let's hold the elections.
 
 @cancel_elections_2
-on-departure: next_election_year = next_election_year + 1; next_election_time = time + 12; pro_republic -= 10; fp_relation -= 8; lp_relation -= 8; dp_relation -= 10; cp_relation -= 8; coup_progress += 2; workers_ip -= 4; corpo_ip -= 5; nomad_ip -= 5; unemployed_ip -= 5; coup_progress += 2 if nsnawp_normalilped >= 0.3; coup_progress += 2 if nsnawp_normalilped + dnvp_normalilped >= 0.5; sa_strength += 100 if coup_progress >= 7; sh_strength += 100 if coup_progress >= 7
+on-departure: next_election_year = next_election_year + 1; next_election_time = time + 12; pro_republic -= 10; fp_relation -= 8; lp_relation -= 8; dp_relation -= 10; cp_relation -= 8; coup_progress += 2; workers_ip -= 4; corpo_ip -= 5; nomad_ip -= 5; unemployed_ip -= 5; coup_progress += 2 if nsnawp_normalized >= 0.3; coup_progress += 2 if nsnawp_normalized + dnvp_normalized >= 0.5; sa_strength += 100 if coup_progress >= 7; sh_strength += 100 if coup_progress >= 7
 achievement: ausnahmelpustand
 
 Fine. President [+ president +] has taken the unprecedented step of canceling these elections. New elections are scheduled for [+ next_election_month : month +] [+ next_election_year +].
@@ -119,7 +119,7 @@ Q.ip_in_government = 0;
 Q.in_lithuania_council = 0;
 Q.in_earth_council = 0;
 Q.in_left_council = 0;
-Q.in_grand_council
+Q.in_grand_council = 0;
 Q.in_popular_front = 0;
 Q.ip_toleration = 0;
 Q.ip_caretaker = 0;
@@ -275,7 +275,7 @@ There are enough votes for us and the Devolutionists to form a council.
 title: Is a United Left council possible?
 subtitle: IPNC + NCWPP + NCSDP ([+ left_council +]%)
 unavailable-subtitle: IPNC + NCWPP + NCSDP ([+ left_council +]%). [? if cp_relation < 50 : We do not have adequate relations with the Communists. ?][? if ((radical_strength + socialist_strength) < (industrialist_strength + labor_strength + liberal_strength)) : The socialists and radicals in our party are far outmatched. ?]
-view-if: left_council >= 50
+view-if: left_council >= 50 and not usp_formed
 choose-if: cp_relation >= 50 and ncsdp_relation >= 40 and ((radical_strength + socialist_strength) > (industrialist_strength + labor_strength + liberal_strength))
 
 There are enough votes for a leftist unity council government, if such a thing were actually possible.
@@ -284,6 +284,21 @@ The far-right might attempt a coup, if such a council were formed.
 
 - @left_council_impossible: This is impossible.
 - @left_council_possible: This could be possible.
+
+@left_council_usp
+title: Is a United Left council possible?
+subtitle: IPNC + USP ([+ left_council_usp +]%)
+unavailable-subtitle: IPNC + USP ([+ left_council_usp +]%). [? if usp_relation < 50 : We do not have adequate relations with the socialists. ?][? if ((radical_strength + socialist_strength) < (industrialist_strength + labor_strength + liberal_strength)) : The socialists and radicals in our party are far outmatched. ?]
+view-if: left_council >= 50 and usp_formed
+choose-if: cp_relation >= 50 and ncsdp_relation >= 40 and ((radical_strength + socialist_strength) > (industrialist_strength + labor_strength + liberal_strength))
+
+There are enough votes for a leftist unity council government, if such a thing were actually possible.
+
+The far-right might attempt a coup, if such a council were formed.
+
+- @left_council_impossible: This is impossible.
+- @left_council_possible: This could be possible.
+
 
 @left_council_impossible
 go-to: council_menu
