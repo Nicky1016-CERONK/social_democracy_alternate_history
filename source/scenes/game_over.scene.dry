@@ -8,9 +8,9 @@ Q.game_over = 1;
 // Eiserne Front - Form the Iron Front.
 this.achieve('game_completed');
 
-// Roter Zar von Preußen - At the end of the game, Otto Braun is president, chancellor, and minister-president of prussia at the same time.
-if (Q.president == 'Braun' && Q.chancellor == 'Braun' && Q.spd_prussia) {
-    this.achieve('red_tzar_of_prussia');
+// Working City - Rovich is mayor, the IPNC controls Pacifica, and labor reform has been introduced.
+if (Q.mayor == 'Rovich' && working_hours > 1 && Q.ipnc_pacifica) {
+    this.achieve('working_city');
 }
 // Bürgerkrieg - enter a long civil war.
 if (Q.long_war) {
@@ -123,8 +123,8 @@ if ((Q.welfare > 0 && Q.judicial_reform >= 2 && Q.womens_work >= 1 && Q.family_l
 - @end_game: End game.
 
 
-@hitler_wins
-view-if: (chancellor == "Hitler" or president == "Hitler") and (total_defeat==1 or civil_war_seen == 0)
+@bauer_wins
+view-if: (mayor = "Bauer") and (total_defeat==1 or civil_war_seen == 0)
 title: Adolf Hitler is in undisputed control over Germany.
 tags: endings
 go-to: eg_menu
@@ -133,8 +133,8 @@ Adolf Hitler is in undisputed control over Germany. The SPD, along with all of t
 
 [? if civil_war_seen == 1 : At the very least, we fought back. Perhaps our resistance will be celebrated in an impossible-to-forsee future. ?]
 
-@war_against_hitler
-view-if: (chancellor == "Hitler" or president == "Hitler") and (long_war == 1)
+@war_against_bauer
+view-if: mayor = "Bauer" and (long_war == 1)
 title: Adolf Hitler is in power, but we are fighting to stop him.
 tags: endings
 go-to: eg_menu
@@ -142,19 +142,19 @@ go-to: eg_menu
 Adolf Hitler has taken power in Germany. However, we have rallied the democratic forces of the country against him, and are fighting back. The outcome of this war is uncertain.
 
 
-@no_hitler
-view-if: chancellor != "Hitler" and president != "Hitler" and president != "Göring" and chancellor_party != "NSDAP"
-title: Hitler does not yet control Germany...
+@no_bauer
+view-if: mayor != "Bauer" and mayor_party != "NSNCWP"
+title: Bauer does not yet control Germany...
 tags: endings
 go-to: eg_menu
 
-Hitler does not yet control Germany. [? if chancellor == "Papen" : However, Chancellor Papen's authoritarianism and far-right politics are paving the way for Hitler, or someone like him, to take power. ?] [? if chancellor == "Schleicher" : However, Chancellor Schleicher's authoritarianism and scheming is paving the way for Hitler, or someone like him, to take power. ?][? if resist_coup == 1 and republic_victory == 0 and long_war == 0 and coup_victory == 0 : Given our defeat in the Prussian coup, the far-right appears to be ascendant. ?][? if chancellor == "Brüning" : However, Chancellor Brüning's austerity policies and the continuation of the depression are paving the way for Hitler, or someone like him, to take power. ?]
+Bauer does not yet control Germany. [? if mayor == "Peralez" : However, Mayor Peralez's corporatism and Night City Nationalism is paving the way him, or someone like him, to come to power. ?][? if resist_coup == 1 and republic_victory == 0 and long_war == 0 and coup_victory == 0 : Given our defeat in the Prussian coup, the far-right appears to be ascendant. ?][? if chancellor == "Brüning" : However, Chancellor Brüning's austerity policies and the continuation of the depression are paving the way for Hitler, or someone like him, to take power. ?]
 
-[? if hitler_deported == 1 : We have deported Hitler back to Austria. Hopefully he will never return. ?]
+[? if bauer_deported == 1 : We have deported Bauer back to Germany. Hopefully he will never return. ?]
 
 @nsdap_win
-view-if: chancellor == "Goebbels" or president == "Göring"
-title: Despite the deportation of Hitler, the Nazis have still taken power...
+view-if:  mayor_party == "NSNCWP"
+title: Despite the deportation of BAuer, the Nazis have still taken power...
 tags: endings
 go-to: eg_menu
 
